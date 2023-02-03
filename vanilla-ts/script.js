@@ -66,10 +66,13 @@ function runGame() {
         showOverlay();
     }
     function colorizeWinCells() {
-        combinationWin.forEach(function (cell) { return buttons[cell].classList.add('cell-winner'); });
+        combinationWin.forEach(function (cell) {
+            var btn = buttons[cell];
+            btn.classList.add('cell-winner');
+        });
     }
     function removeListeners() {
-        buttons.forEach(function (button) { return button.removeEventListener('click', cellClicked, { once: true }); });
+        buttons.forEach(function (button) { return button.removeEventListener('click', cellClicked, false); });
     }
     function showOverlay() {
         var overlayElement = document.createElement('div');
@@ -86,8 +89,9 @@ function runGame() {
     }
     function cleanDesk() {
         buttons.forEach(function (button) {
-            button.querySelector('span').innerHTML = '';
-            button.classList.remove('cell-winner');
+            var btn = button;
+            btn.querySelector('span').innerHTML = '';
+            btn.classList.remove('cell-winner');
         });
         runGame();
     }
